@@ -157,6 +157,7 @@ hist_freelunch
 Excercise 5 solution:
 
 ```{r STRmean, eval=TRUE}
+library(dplyr)
 eduwa_STR=eduwa[complete.cases(eduwa$Student.Teacher.Ratio),]
 eduwa_STR_mini = select(eduwa_STR, "County", "Student.Teacher.Ratio")
 STRmean = tapply(eduwa_STR_mini$Student.Teacher.Ratio, 
