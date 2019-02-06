@@ -10,18 +10,18 @@ output:
 
 First, we need to call data and prepare it for the excercises (cheking the structure, types of veriable, etc)
 
-```{r getData, eval=FALSE}
+```{r getData, eval=TRUE}
 link='https://github.com/EvansDataScience/VisualAnalytics_2_tabularData/raw/master/data/eduwa.rda'
 load(file=url(link))
 ```
 
-```{r dataSTR, eval=FALSE}
+```{r dataSTR, eval=TRUE}
 str(eduwa,width = 100,strict.width='cut')
 ```
 
 Then, we build the table of frequences, which we will be working with further
 
-```{r freqTab, eval=FALSE}
+```{r freqTab, eval=TRUE}
 absoluteT=table(eduwa$LocaleType,exclude = 'nothing')
 names(absoluteT)[5]='Unknown'
 ToPlot=prop.table(absoluteT)*100
@@ -32,7 +32,7 @@ ToPlot
 
 Excercise 1 solution:
 
-```{r barplot_gg_ex, eval=FALSE}
+```{r barplot_gg_ex, eval=TRUE}
 library(ggplot2)
 library(scales)
 
@@ -71,7 +71,7 @@ barplot
 
 Excercise 2 solution:
 
-```{r lolli_gg_ex, eval=FALSE}
+```{r lolli_gg_ex, eval=TRUE}
 tableFreq$gap=tableFreq$pct-25 # creating new variable "gap" to show gaps
 tableFreq$PositiveGap=ifelse(tableFreq$gap>0,'Above 25% baseline', 'Below 25% baseline') # creating variable to show gaps with color
 
@@ -103,7 +103,7 @@ lolliplot
 
 Excercise 3 solution:
 
-```{r boxplot_gg_ex, eval=FALSE}
+```{r boxplot_gg_ex, eval=TRUE}
 boxplot = ggplot(eduwa, aes(y=as.numeric(High.Grade))) + #data, aesthetics (mapping only y for this type of plot), High.Grade is ordinal variable, but boxplot expects from us a numerical var, so we transform High.Grade into numerical by using = as.numeric()
             geom_boxplot() + #boxplot geometry
             coord_flip() + #flipping the plot
@@ -126,13 +126,13 @@ boxplot
 
 Excercise 4 solution:
 
-```{r freelunch, eval=FALSE}
+```{r freelunch, eval=TRUE}
 summary(eduwa$Free.Lunch)
 eduwa_freelunch=eduwa[complete.cases(eduwa$Free.Lunch),]
 ```
 
 
-```{r hist_freelunch_gg_ex, eval=FALSE}
+```{r hist_freelunch_gg_ex, eval=TRUE}
 hist_freelunch = ggplot(eduwa_freelunch,aes(x = Free.Lunch)) + 
                     geom_histogram(color="black", fill="lightblue", binwidth = 150, boundary=0) + #changing color, filling, and width
                     stat_bin(binwidth = 150, aes(label=..count..), ##putting numbers of values in each bin above bins using count
@@ -156,7 +156,7 @@ hist_freelunch
 
 Excercise 5 solution:
 
-```{r STRmean, eval=FALSE}
+```{r STRmean, eval=TRUE}
 eduwa_STR=eduwa[complete.cases(eduwa$Student.Teacher.Ratio),]
 eduwa_STR_mini = select(eduwa_STR, "County", "Student.Teacher.Ratio")
 STRmean = tapply(eduwa_STR_mini$Student.Teacher.Ratio, 
@@ -166,7 +166,7 @@ STRdf = as.data.frame(STRmean)
 summary(STRdf)
 ```
 
-```{r hist_STRmean_gg_ex, eval=FALSE}
+```{r hist_STRmean_gg_ex, eval=TRUE}
 hist_STRmean = ggplot(STRdf,aes(x = STRmean)) + 
                     geom_histogram(color="black", fill="lightblue", binwidth = 2, boundary=0) + #changing color, filling, and width
                     scale_y_continuous(breaks = seq(0, 20, by = 2)) + #y axis breaks
@@ -189,7 +189,7 @@ hist_STRmean = ggplot(STRdf,aes(x = STRmean)) +
 hist_STRmean
 ```
 
-```{r dens_STRmean_gg_ex, eval=FALSE}
+```{r dens_STRmean_gg_ex, eval=TRUE}
 dens_STRmean = ggplot(STRdf,aes(x = STRmean)) + #data and aesthetics, mapping x
                   geom_density(color="black") + #changing color
                   scale_x_continuous(breaks = seq(10, 24, by = 1)) + #x axis breaks
