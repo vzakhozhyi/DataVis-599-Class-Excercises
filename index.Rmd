@@ -32,7 +32,7 @@ ToPlot
 
 Excercise 1 solution:
 
-```{r barplot_gg_ex, eval=TRUE}
+```{r barplot_gg_ex, eval=TRUE,fig.show='asis'}
 library(ggplot2)
 library(scales)
 
